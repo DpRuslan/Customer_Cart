@@ -69,6 +69,7 @@ extension Cart_Details: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell") as! Item_Cell
         cell.titleItem.text = data[indexPath.row].cellTitle
         cell.valueItem.text = data[indexPath.row].cellValue
+        cell.selectionStyle = .none
         return cell
     }
 }

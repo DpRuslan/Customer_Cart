@@ -7,30 +7,6 @@ class Cart_Details: UIViewController {
     var urlOfPhoto: URL!
     var data: [Info] = []
     
-    func assignData() -> [Info] {
-        data = [.name(value: infoModel.product.name), .quantity(value: "\(infoModel.quantity)"), .sub_total(value: Double(infoModel.sub_total)), .packaging_type(value: infoModel.packaging_type), .substitutable(value: " \(infoModel.substitutable)")]
-        if infoModel.packaging_type == "unit" {
-            data.insert(.price(value: Double(infoModel.product.unit_price)), at: 1)
-            urlOfPhoto = URL(string: infoModel.product.unit_photo_filename)
-        } else if infoModel.packaging_type == "case" {
-            urlOfPhoto = URL(string: infoModel.product.pack_photo_file)
-            data.insert(.price(value: Double(infoModel.product.case_price)), at: 1)
-        } else {
-            urlOfPhoto = URL(string: infoModel.product.weight_photo_filename)
-            data.insert(.price(value: Double(infoModel.product.weight_price)), at: 1)
-        }
-        return data
-    }
-    
-    func assignImage() -> UIImage {
-            guard let urlOfPhoto = urlOfPhoto else {
-                imageOfItem.image = UIImage(named: "placeholder")
-                return imageOfItem.image!
-            }
-            imageOfItem.image = UIImage(data: try! Data(contentsOf: urlOfPhoto))
-            return imageOfItem.image!
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         data = assignData()
@@ -64,6 +40,7 @@ extension Cart_Details {
                 return "Substitutable"
             }
         }
+        
         var cellValue: String {
             switch self {
             case .name(let value):
@@ -84,7 +61,6 @@ extension Cart_Details {
 }
 
 extension Cart_Details: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
@@ -94,5 +70,31 @@ extension Cart_Details: UITableViewDataSource {
         cell.titleItem.text = data[indexPath.row].cellTitle
         cell.valueItem.text = data[indexPath.row].cellValue
         return cell
+    }
+}
+
+extension Cart_Details {
+    func assignData() -> [Info] {
+        data = [.name(value: infoModel.product.name), .quantity(value: "\(infoModel.quantity)"), .sub_total(value: Double(infoModel.sub_total)), .packaging_type(value: infoModel.packaging_type), .substitutable(value: " \(infoModel.substitutable)")]
+        if infoModel.packaging_type == "unit" {
+            data.insert(.price(value: Double(infoModel.product.unit_price)), at: 1)
+            urlOfPhoto = URL(string: infoModel.product.unit_photo_filename)
+        } else if infoModel.packaging_type == "case" {
+            urlOfPhoto = URL(string: infoModel.product.pack_photo_file)
+            data.insert(.price(value: Double(infoModel.product.case_price)), at: 1)
+        } else {
+            urlOfPhoto = URL(string: infoModel.product.weight_photo_filename)
+            data.insert(.price(value: Double(infoModel.product.weight_price)), at: 1)
+        }
+        return data
+    }
+    
+    func assignImage() -> UIImage {
+        guard let urlOfPhoto = urlOfPhoto else {
+            imageOfItem.image = UIImage(named: "placeholder")
+            return imageOfItem.image!
+        }
+        imageOfItem.image = UIImage(data: try! Data(contentsOf: urlOfPhoto))
+        return imageOfItem.image!
     }
 }

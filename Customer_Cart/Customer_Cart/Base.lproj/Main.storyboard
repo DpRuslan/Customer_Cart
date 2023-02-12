@@ -70,23 +70,31 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GNL-K4-b1N">
-                                            <rect key="frame" x="20" y="11" width="374" height="48"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GNL-K4-b1N">
+                                            <rect key="frame" x="65" y="11" width="284" height="48"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="GNL-K4-b1N" secondAttribute="bottom" id="9uQ-Ou-sZz"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="GNL-K4-b1N" secondAttribute="trailing" id="9vu-sa-zvh"/>
-                                        <constraint firstItem="GNL-K4-b1N" firstAttribute="leading" secondItem="cFP-Qm-aPi" secondAttribute="leadingMargin" id="b7Y-rl-EW5"/>
-                                        <constraint firstItem="GNL-K4-b1N" firstAttribute="top" secondItem="cFP-Qm-aPi" secondAttribute="topMargin" id="zGz-Nn-tE4"/>
+                                        <constraint firstItem="GNL-K4-b1N" firstAttribute="leading" secondItem="cFP-Qm-aPi" secondAttribute="leadingMargin" constant="45" id="0KB-wm-6tj"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="GNL-K4-b1N" secondAttribute="trailing" constant="45" id="Zzg-Vp-MyG"/>
+                                        <constraint firstItem="GNL-K4-b1N" firstAttribute="top" secondItem="cFP-Qm-aPi" secondAttribute="topMargin" id="bMD-SE-Btt"/>
+                                        <constraint firstItem="GNL-K4-b1N" firstAttribute="bottom" secondItem="cFP-Qm-aPi" secondAttribute="bottomMargin" id="jB8-fK-9Ce"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="cartName" destination="GNL-K4-b1N" id="TdW-5N-5ah"/>
+                                    <outlet property="cartTotalTitle" destination="GNL-K4-b1N" id="TdW-5N-5ah"/>
                                 </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="rmR-4Y-rqh">
+                                <rect key="frame" x="0.0" y="114.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rmR-4Y-rqh" id="cvi-VD-44F">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -98,7 +106,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v2R-Ld-6tM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="675" y="84"/>
+            <point key="canvasLocation" x="672.46376811594212" y="83.705357142857139"/>
         </scene>
         <!--Cart Details-->
         <scene sceneID="ifI-4h-Hcy">

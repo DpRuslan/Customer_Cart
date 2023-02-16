@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Cart" representedClassName="Cart" syncable="YES">
+        <attribute name="case_price" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="packaging_type" optional="YES" attributeType="String"/>
+        <attribute name="quantity" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="sub_total" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="substitutable" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="unit_price" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="weight_price" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="photo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ItemPhoto" inverseName="cart" inverseEntity="ItemPhoto"/>
+    </entity>
+    <entity name="CartTotal" representedClassName="CartTotal" syncable="YES">
+        <attribute name="cart_total" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ItemPhoto" representedClassName="ItemPhoto" syncable="YES">
+        <attribute name="pack_photo_file" optional="YES" attributeType="String"/>
+        <attribute name="unit_photo_filename" optional="YES" attributeType="String"/>
+        <attribute name="weight_photo_filename" optional="YES" attributeType="String"/>
+        <relationship name="cart" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cart" inverseName="photo" inverseEntity="Cart"/>
+    </entity>
+    <elements>
+        <element name="Cart" positionX="-63" positionY="-18" width="128" height="164"/>
+        <element name="ItemPhoto" positionX="-54" positionY="63" width="128" height="89"/>
+        <element name="CartTotal" positionX="-63" positionY="72" width="128" height="44"/>
+    </elements>
+</model>

@@ -1,12 +1,5 @@
-//
-//  AppDelegate.swift
-//  Customer_Cart
-//
-//  Created by Ruslan Yarkun on 08.02.2023.
-//
-
 import UIKit
-
+import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -30,6 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    // MARK: CoreDataStack
+    
+    static var coreDataStack = CoreDataStack(modelName: "Cart")
 
 
 }

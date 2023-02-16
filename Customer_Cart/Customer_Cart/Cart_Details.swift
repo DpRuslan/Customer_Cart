@@ -1,17 +1,21 @@
 import UIKit
+import CoreData
 
 class Cart_Details: UIViewController {
     @IBOutlet var imageOfItem: UIImageView!
     @IBOutlet var tableView: UITableView!
     var infoModel: Customer_Cart.InfoOfEachItem!
+    var infoID: NSManagedObjectID!
     var urlOfPhoto: URL!
     var data: [Info] = []
+    var cart: Cart!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         data = assignData()
         self.tableView.dataSource = self
         imageOfItem.image = assignImage()
+        
     }
 }
 
@@ -76,16 +80,17 @@ extension Cart_Details: UITableViewDataSource {
 
 extension Cart_Details {
     func assignData() -> [Info] {
-        data = [.name(value: infoModel.product.name), .quantity(value: "\(infoModel.quantity)"), .sub_total(value: Double(infoModel.sub_total)), .packaging_type(value: infoModel.packaging_type), .substitutable(value: " \(infoModel.substitutable)")]
-        if infoModel.packaging_type == "unit" {
-            data.insert(.price(value: Double(infoModel.product.unit_price)), at: 1)
-            urlOfPhoto = URL(string: infoModel.product.unit_photo_filename)
-        } else if infoModel.packaging_type == "case" {
-            urlOfPhoto = URL(string: infoModel.product.pack_photo_file)
-            data.insert(.price(value: Double(infoModel.product.case_price)), at: 1)
+        cart = AppDelegate.coreDataStack.managedContext.object(with: infoID) as? Cart
+        data = [.name(value: cart.name!), .quantity(value: "\(cart.quantity)"), .sub_total(value: Double(cart.sub_total)), .packaging_type(value: cart.packaging_type!), .substitutable(value: " \(cart.substitutable)")]
+        if cart.packaging_type == "unit" {
+            data.insert(.price(value: Double(cart.unit_price)), at: 1)
+            urlOfPhoto = URL(string: (cart.photo?.unit_photo_filename)!)
+        } else if cart.packaging_type == "case" {
+            urlOfPhoto = URL(string: cart.photo!.pack_photo_file!)
+            data.insert(.price(value: Double(cart.case_price)), at: 1)
         } else {
-            urlOfPhoto = URL(string: infoModel.product.weight_photo_filename)
-            data.insert(.price(value: Double(infoModel.product.weight_price)), at: 1)
+            urlOfPhoto = URL(string: cart.photo!.weight_photo_filename!)
+            data.insert(.price(value: Double(cart.weight_price)), at: 1)
         }
         return data
     }

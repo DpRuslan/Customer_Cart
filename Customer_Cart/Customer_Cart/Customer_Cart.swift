@@ -11,6 +11,7 @@ class Customer_Cart: UITableViewController {
         self.searchBar.delegate = self
         navigationItem.hidesBackButton = true
         navigationItem.title = "Customer Cart"
+        searchBar.placeholder = "Type something"
     }
 }
 
@@ -96,6 +97,7 @@ extension Customer_Cart: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         filteredFlag = false
         searchBar.text = ""
+        searchBar.resignFirstResponder()
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }

@@ -20,7 +20,7 @@ class ManagerAPI {
                         return
                     }
                     let decoder = JSONDecoder()
-                    if let decodedData = try? decoder.decode(Customer_Cart.Details.self, from: data) {
+                    if let decodedData = try? decoder.decode(Customer_Cart_Core.Details.self, from: data) {
                         let newCartTotal = CartTotal(context: AppDelegate.coreDataStack.managedContext)
                         newCartTotal.cart_total = decodedData.cart_total
                         for i in decodedData.order_items_information {

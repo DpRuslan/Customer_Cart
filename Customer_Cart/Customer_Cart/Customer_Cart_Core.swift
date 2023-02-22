@@ -105,6 +105,28 @@ extension Customer_Cart_Core: UISearchBarDelegate {
 }
 
 extension Customer_Cart_Core {
+    struct Details: Decodable {
+        var id: Int
+        var cart_total: Double
+        var order_items_information: [InfoOfEachItem]
+    }
     
+    struct InfoOfEachItem: Decodable {
+        var product: ProductInfo
+        var packaging_type: String
+        var quantity: Double
+        var sub_total: Int
+        var substitutable: Bool
+    }
+    
+    struct ProductInfo: Decodable {
+        var name: String
+        var unit_price: Int
+        var case_price: Int
+        var weight_price: Int
+        var unit_photo_filename: String
+        var weight_photo_filename: String
+        var pack_photo_file: String
+    }
 }
 

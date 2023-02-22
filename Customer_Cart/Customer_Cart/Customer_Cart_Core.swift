@@ -21,6 +21,7 @@ class Customer_Cart_Core: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.searchBar.delegate = self
+        self.navigationItem.hidesBackButton = true
         managerAPI.receiveParse { [weak self] in
             try? self?.fetchedResultController.performFetch()
             DispatchQueue.main.async { [weak self] in
@@ -28,7 +29,6 @@ class Customer_Cart_Core: UIViewController {
                 self?.cart_total_Label.text = "Cart total: \(self!.fetchDataFromCartTotal() / 100)"
             }
         }
-       
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -36,9 +36,6 @@ class Customer_Cart_Core: UIViewController {
             self.tableView.reloadData()
         }
     }
-   
-    
-
 
     func fetchDataFromCartTotal() -> Double {
         let fetchRequest: NSFetchRequest<CartTotal> = CartTotal.fetchRequest()
@@ -47,9 +44,6 @@ class Customer_Cart_Core: UIViewController {
         return item
     }
 }
-
-
-
 
 extension Customer_Cart_Core: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,7 +58,6 @@ extension Customer_Cart_Core: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cart_Cell")
             cell?.textLabel?.text = filteredData[indexPath.row].name
             return cell!
-            
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cart_Cell", for: indexPath)
         let infoModel = fetchedResultController.object(at: indexPath)
@@ -74,22 +67,14 @@ extension Customer_Cart_Core: UITableViewDataSource {
     }
 }
 
-
 extension Customer_Cart_Core: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let infoModelDel = fetchedResultController.object(at: indexPath)
-        AppDelegate.coreDataStack.managedContext.delete(infoModelDel)
-        try? AppDelegate.coreDataStack.managedContext.save()
-        DispatchQueue.main.async {
-            try? self.fetchedResultController.performFetch()
-            self.tableView.reloadData()
-        }
-//        let infoModel = fetchedResultController.object(at: indexPath)
-//        let infoModelId = infoModel.objectID
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Cart_Details") as! Cart_Details
-//        vc.infoID = infoModelId
-//        self.navigationController?.pushViewController(vc, animated: true)
-        }
+        let infoModel = fetchedResultController.object(at: indexPath)
+        let infoModelId = infoModel.objectID
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Cart_Details") as! Cart_Details
+        vc.infoID = infoModelId
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension Customer_Cart_Core: UISearchBarDelegate {
@@ -104,18 +89,22 @@ extension Customer_Cart_Core: UISearchBarDelegate {
         } else {
             filteredFlag = false
         }
-
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         filteredFlag = false
         searchBar.text = ""
-        searchBar.accessibilityElementsHidden = true
+        searchBar.resignFirstResponder()
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
+}
+
+extension Customer_Cart_Core {
+    
 }
 

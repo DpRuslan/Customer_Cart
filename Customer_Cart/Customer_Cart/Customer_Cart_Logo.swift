@@ -7,7 +7,7 @@ class Customer_Cart_Logo: UIViewController {
         super.viewDidLoad()
         logo.image = UIImage(named: "Custom_Cart")
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Customer_Cart") as! Customer_Cart_Core
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

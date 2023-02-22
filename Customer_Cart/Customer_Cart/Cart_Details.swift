@@ -4,7 +4,6 @@ import CoreData
 class Cart_Details: UIViewController {
     @IBOutlet var imageOfItem: UIImageView!
     @IBOutlet var tableView: UITableView!
-    var infoModel: Customer_Cart.InfoOfEachItem!
     var infoID: NSManagedObjectID!
     var urlOfPhoto: URL!
     var data: [Info] = []
